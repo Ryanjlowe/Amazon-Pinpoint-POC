@@ -65,11 +65,15 @@ For each of the templates below, create them -  TODO
 
 #### Upsell Template
 
+**Name:** Standard_Upsell
+
 [Template File](templates/1_upsell.html)
 
 **Subject:** Did you know about our Premium Subscription Plan {{User.UserAttributes.FirstName}}?
 
 #### Renewal 10% Off Template
+
+Name: Renew_10_percent_off
 
 [Template File](templates/2_renew_10.html)
 
@@ -77,12 +81,16 @@ For each of the templates below, create them -  TODO
 
 #### Renewal 30% Off Template
 
+**Name:** Renew_30_percent_off
+
 [Template File](templates/3_renew_30.html)
 
 **Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 30% Off!
 
 
 #### Renewal Reminder Template
+
+**Name:** Renew_reminder
 
 [Template File](templates/4_renewal_reminder.html)
 
@@ -124,16 +132,16 @@ We will now create three new dynamic segments by applying attribute filters to t
 1. While still in the Project **My Pinpoint Project**.
 1. Choose **Create a segment** from the **Segments** screen.
 1. Select **Build a segment**.
-1. Provide the name **UPL Upsell Eligible** into the name field.
+1. Provide the name **Standard Plan Upsell Eligible** into the name field.
 1. Configure **Segment Group 1** to add segment filters.
    1. Under the **Add filters to refine your segment** choose **Filter by user**.
    1. For the **Choose an user attribute** dropdown choose **Stage**
    1. Ensure **Is** is chosen in the middle dropdown.
    1. In the **Choose values** dropdown choose **Upsell**.
    1. Choose **+ Add an attribute or metric**
-   1. For the **Choose an user attribute** dropdown choose **LoanType**
+   1. For the **Choose an user attribute** dropdown choose **PlanType**
    1. Ensure **Is** is chosen in the middle dropdown.
-   1. In the **Choose values** dropdown choose **UPL**.
+   1. In the **Choose values** dropdown choose **Standard**.
 1. Click **Create Segment** to create your second dynamic segment.  Note, a pop-up will appear highlighting that this segment targets multiple endpoint channels, not just Email.  Select **I Understand**.  Alternatively, we can add a **Filter by Channel** and select the Channel **Email** explicitly in the **Segment Group**.
 
 #### High Value Customer Segment
@@ -162,13 +170,13 @@ We will now go through the steps to set up a campaign.
 1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Campaigns**.
 1. Choose **Create a campaign**.
 1. Configure the campaign name, type, and channel:
-   1. You can choose the name freely, i.e. "**UPL Upsell Eligible**"
+   1. You can choose the name freely, i.e. "**Standard Plan Upsell Eligible**"
    1. Select "**Standard Campaign**" as type
    1. Select "**Email**" as channel
    1. Choose **Next**.
-1. Select **Use an existing segment** and select the dynamic segment **UPL Upsell Eligible** you created earlier. Choose **Next**.
+1. Select **Use an existing segment** and select the dynamic segment **Standard Plan Upsell Eligible** you created earlier. Choose **Next**.
 1. In the **Create your message** step choose **Choose a template** which will open up a new modal window.
-   1. Choose the messaging template **UPL_Upsell** and choose **Choose template**.
+   1. Choose the messaging template **Standard_Upsell** and choose **Choose template**.
    1. Back on the **Create your message** step choose **Next**.
 1. Now you **Choose when to send the campaign**. Dynamic segments can be triggered by events. Choose **At a specific time**.
   * Note: When using a dynamic segment, like we are, the criteria for that segment will be processed at time of campaign send.  In this way, you can configure a campaign to have a recurrence in which the segment criteria will be evaluated before each send.  This is useful for Welcome campaigns, for instance, where everyday all new segment endpoints will be sent a message.
@@ -220,7 +228,7 @@ We are going to create a Renewal Journey to send a renewal email to all of our c
 1. Add an email activity for the high value customers who did not open the first email.
    1. Choose **Add activity** directly under the new **No** split path.
    1. Under **Choose a journey activity** choose **Send email**.
-   1. Choose **Choose an email template** and select **Renew_reminder_percent_off** and choose **Choose template**.
+   1. Choose **Choose an email template** and select **Renew_reminder** and choose **Choose template**.
    1. Choose **Save**.
 1. Lastly, review your Journey before launching by choosing **Review**.
    1. Choose **Next** in the window that opened on the left.
