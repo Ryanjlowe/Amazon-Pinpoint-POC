@@ -2,6 +2,10 @@
 
 Amazon Pinpoint is a multi-channel digital engagement service. It is a part of the Customer Engagement suite of services, enabling customers to send both transactional and promotional messages across email, SMS, push notification, voice, and custom channels.
 
+> This POC provides sample Pinpoint Endpoint data and sample Email Templates. These can be used to set up a fully functional Pinpoint instance.  However, we recommend replacing the sample endpoint data with real customer end-user data, replacing the email templates with real customer templates, and replacing the Campaign and Journey use-cases with real use-cases.  The samples can be used as a reference.
+>
+> The blockquote syntax will be used to denote places where real customer data should be provided.
+
 This repository assumes a base familiarity with the service and if you have not already done so it is recommended that you use the getting-started material below.
 
 ## Introduction to Amazon Pinpoint
@@ -263,3 +267,24 @@ We are going to create a Renewal Journey to send a renewal email to all of our c
 
 
 ## Run Queries in Athena
+
+Now that we have sent campaign and journey emails, we can query the engagement data to see the individual events produced by Pinpoint's Event Stream using the Digital User Engagement Events Database Solution we deployed earlier.  The solution registers with Amazon Athena and AWS Glue the event schema of the events making it easy to query.  A full data dictionary is found in the [implementation guide](https://docs.aws.amazon.com/solutions/latest/digital-user-engagement-events-database/appendix-a.html).  We will be using a sample query taken from the [Appendix B of the guide](https://docs.aws.amazon.com/solutions/latest/digital-user-engagement-events-database/appendix-b.html).
+
+1. Navigate to the [Amazon Athena Console](https://console.aws.amazon.com/athena/).
+1. Choose **due_eventdb** from the **Database** dropdown.
+1. If necessary, choose **Settings** and then provide an Amazon S3 path in the **Query result location** field.
+1. In the query window, paste the following query:
+```sql
+SELECT
+ subject, COUNT(*) as sends,
+ (SELECT COUNT(*) FROM email_open WHERE email_open.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumOpens,
+ (SELECT COUNT(*) FROM email_click WHERE email_click.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumClicks,
+ (SELECT COUNT(*) FROM email_unsubscribe WHERE email_unsubscribe.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumUnsubs
+
+FROM email_send
+WHERE ingest_timestamp > current_timestamp - interval '30' day
+GROUP BY subject
+ORDER BY COUNT(*) DESC
+```
+1.  Choose **Run query** to execute the query.  This query will show you number of opens, clicks, and unsubscribes by Email Subject line.
+1.  Choose other queries from the implementation guide, or write your own to explore the events across the different Athena views.
