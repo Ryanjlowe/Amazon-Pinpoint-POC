@@ -85,10 +85,10 @@ We will now create three new dynamic segments by applying attribute filters to t
 1. Select **Build a segment**.
 1. Provide the name **Renewal Eligible** into the name field.
 1. Configure **Segment Group 1** to add segment filters.
-    1. Under the **Add filters to refine your segment** choose **Filter by user**.
-    1. For the **Choose an user attribute** dropdown choose **Stage**
-    1. Ensure **Is** is chosen in the middle dropdown.
-    1. In the **Choose values** dropdown choose **Renewal**.
+   1. Under the **Add filters to refine your segment** choose **Filter by user**.
+   1. For the **Choose an user attribute** dropdown choose **Stage**
+   1. Ensure **Is** is chosen in the middle dropdown.
+   1. In the **Choose values** dropdown choose **Renewal**.
 1. Click **Create Segment** to create your first dynamic segment.  Note, a pop-up will appear highlighting that this segment targets multiple endpoint channels, not just Email.  Select **I Understand**.  Alternatively, we can add a **Filter by Channel** and select the Channel **Email** explicitly in the **Segment Group**.
 
 #### Upsell Eligible Segment
@@ -97,14 +97,14 @@ We will now create three new dynamic segments by applying attribute filters to t
 1. Select **Build a segment**.
 1. Provide the name **UPL Upsell Eligible** into the name field.
 1. Configure **Segment Group 1** to add segment filters.
-    1. Under the **Add filters to refine your segment** choose **Filter by user**.
-    1. For the **Choose an user attribute** dropdown choose **Stage**
-    1. Ensure **Is** is chosen in the middle dropdown.
-    1. In the **Choose values** dropdown choose **Upsell**.
-    1. Choose **+ Add an attribute or metric**
-    1. For the **Choose an user attribute** dropdown choose **LoanType**
-    1. Ensure **Is** is chosen in the middle dropdown.
-    1. In the **Choose values** dropdown choose **UPL**.
+   1. Under the **Add filters to refine your segment** choose **Filter by user**.
+   1. For the **Choose an user attribute** dropdown choose **Stage**
+   1. Ensure **Is** is chosen in the middle dropdown.
+   1. In the **Choose values** dropdown choose **Upsell**.
+   1. Choose **+ Add an attribute or metric**
+   1. For the **Choose an user attribute** dropdown choose **LoanType**
+   1. Ensure **Is** is chosen in the middle dropdown.
+   1. In the **Choose values** dropdown choose **UPL**.
 1. Click **Create Segment** to create your second dynamic segment.  Note, a pop-up will appear highlighting that this segment targets multiple endpoint channels, not just Email.  Select **I Understand**.  Alternatively, we can add a **Filter by Channel** and select the Channel **Email** explicitly in the **Segment Group**.
 
 #### High Value Customer Segment
@@ -113,10 +113,10 @@ We will now create three new dynamic segments by applying attribute filters to t
 1. Select **Build a segment**.
 1. Provide the name **High Value Customers** into the name field.
 1. Configure **Segment Group 1** to add segment filters.
-    1. Under the **Add filters to refine your segment** choose **Filter by user**.
-    1. For the **Choose an user attribute** dropdown choose **CLVTier**
-    1. Ensure **Is** is chosen in the middle dropdown.
-    1. In the **Choose values** dropdown choose **High**.
+   1. Under the **Add filters to refine your segment** choose **Filter by user**.
+   1. For the **Choose an user attribute** dropdown choose **CLVTier**
+   1. Ensure **Is** is chosen in the middle dropdown.
+   1. In the **Choose values** dropdown choose **High**.
 
 1. Click **Create Segment** to create your third dynamic segment.  Note, a pop-up will appear highlighting that this segment targets multiple endpoint channels, not just Email.  Select **I Understand**.  Alternatively, we can add a **Filter by Channel** and select the Channel **Email** explicitly in the **Segment Group**.
 
@@ -133,14 +133,14 @@ We will now go through the steps to set up a campaign.
 1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Campaigns**.
 1. Choose **Create a campaign**.
 1. Configure the campaign name, type, and channel:
-    1. You can choose the name freely, i.e. "**UPL Upsell Eligible**"
-    1. Select "**Standard Campaign**" as type
-    1. Select "**Email**" as channel
-    1. Choose **Next**.
+   1. You can choose the name freely, i.e. "**UPL Upsell Eligible**"
+   1. Select "**Standard Campaign**" as type
+   1. Select "**Email**" as channel
+   1. Choose **Next**.
 1. Select **Use an existing segment** and select the dynamic segment **UPL Upsell Eligible** you created earlier. Choose **Next**.
 1. In the **Create your message** step choose **Choose a template** which will open up a new modal window.
-  1. Choose the messaging template **UPL_Upsell** and choose **Choose template**.
-  1. Back on the **Create your message** step choose **Next**.
+   1. Choose the messaging template **UPL_Upsell** and choose **Choose template**.
+   1. Back on the **Create your message** step choose **Next**.
 1. Now you **Choose when to send the campaign**. Dynamic segments can be triggered by events. Choose **At a specific time**.
   * Note: When using a dynamic segment, like we are, the criteria for that segment will be processed at time of campaign send.  In this way, you can configure a campaign to have a recurrence in which the segment criteria will be evaluated before each send.  This is useful for Welcome campaigns, for instance, where everyday all new segment endpoints will be sent a message.
 1. Look at the different options on this screen.  You can set the campaign to execute immediately by choosing **Next**.
@@ -158,43 +158,43 @@ We are going to create a Renewal Journey to send a renewal email to all of our c
 1. Follow the guided help to see all of the Journey features.
 1. Give the Journey the name **Renewal Journey** by replacing the **Untitled** text.
 1. Define a Journey entry criteria
-  1. Choose **Set entry condition**
-  1. Under **Segments** choose **Renewal Eligible** dynamic segment created earlier.
-  1. Under **Specify how often to add new segment members** choose **Once every** then choose **1** and **days**.
+   1. Choose **Set entry condition**
+   1. Under **Segments** choose **Renewal Eligible** dynamic segment created earlier.
+   1. Under **Specify how often to add new segment members** choose **Once every** then choose **1** and **days**.
     * This will evaluate the criteria for the dynamic segment everyday and push new endpoints into this journey.
-  1. Choose **Save**
+   1. Choose **Save**
 1. Add a decision split to branch the journey based on High Value vs Low Value customers.
-  1. Choose **Add activity** directly under the **Journey entry** activity
-  1. Under **Choose a journey activity** choose **Yes/no split**.
-  1. Under **Select a condition type** choose **Segment**.
-  1. Under **Segments** choose the **High Value Customers** dynamic segment created earlier.
-  1. Choose **Save**
+   1. Choose **Add activity** directly under the **Journey entry** activity
+   1. Under **Choose a journey activity** choose **Yes/no split**.
+   1. Under **Select a condition type** choose **Segment**.
+   1. Under **Segments** choose the **High Value Customers** dynamic segment created earlier.
+   1. Choose **Save**
 1. Add an email activity for our high value customers
-  1. Choose **Add activity** directly under the **Yes** split path.
-  1. Under **Choose a journey activity** choose **Send email**.
-  1. Choose **Choose an email template** and select **Renew_30_percent_off** and choose **Choose template**.
-  1. Choose **Save**.
+   1. Choose **Add activity** directly under the **Yes** split path.
+   1. Under **Choose a journey activity** choose **Send email**.
+   1. Choose **Choose an email template** and select **Renew_30_percent_off** and choose **Choose template**.
+   1. Choose **Save**.
 1. Add an email activity for our NOT high value customers
-  1. Choose **Add activity** directly under the **No** split path.
-  1. Under **Choose a journey activity** choose **Send email**.
-  1. Choose **Choose an email template** and select **Renew_10_percent_off** and choose **Choose template**.
-  1. Choose **Save**.
+   1. Choose **Add activity** directly under the **No** split path.
+   1. Under **Choose a journey activity** choose **Send email**.
+   1. Choose **Choose an email template** and select **Renew_10_percent_off** and choose **Choose template**.
+   1. Choose **Save**.
 1. Configure a reminder email for our high value customers if they do not open the first email after 3 days.
-  1. Choose **Add activity** directly under the **Send email** activity on the **Yes** path.
-  1. Under **Choose a journey activity** choose **Yes/no split**.
-  1. Under **Select a condition type** choose **Event**.
-  1. Under **Events** choose **Email open**.
-  1. Under **Activity** choose **Renew_30_percent_off**.
-  1. Under **Condition evaluation** choose **Evaluate after**.
-  1. Choose **3** and **days**
-  1. Choose **Save**
+   1. Choose **Add activity** directly under the **Send email** activity on the **Yes** path.
+   1. Under **Choose a journey activity** choose **Yes/no split**.
+   1. Under **Select a condition type** choose **Event**.
+   1. Under **Events** choose **Email open**.
+   1. Under **Activity** choose **Renew_30_percent_off**.
+   1. Under **Condition evaluation** choose **Evaluate after**.
+   1. Choose **3** and **days**
+   1. Choose **Save**
 1. Add an email activity for the high value customers who did not open the first email.
-  1. Choose **Add activity** directly under the new **No** split path.
-  1. Under **Choose a journey activity** choose **Send email**.
-  1. Choose **Choose an email template** and select **Renew_reminder_percent_off** and choose **Choose template**.
-  1. Choose **Save**.
+   1. Choose **Add activity** directly under the new **No** split path.
+   1. Under **Choose a journey activity** choose **Send email**.
+   1. Choose **Choose an email template** and select **Renew_reminder_percent_off** and choose **Choose template**.
+   1. Choose **Save**.
 1. Lastly, review your Journey before launching by choosing **Review**.
-  1. Choose **Next** in the window that opened on the left.
-  1. Review the following screen and choose the **Publish**.
-  1. While the Journey countdown timer prepares to launch the journey, choose **View Metrics** and choose **Get Started**
-  1. Wait for the timer to complete and then you can view the journey metrics.  Viewing each activity in the journey will show you how many endpoints each activity received.
+   1. Choose **Next** in the window that opened on the left.
+   1. Review the following screen and choose the **Publish**.
+   1. While the Journey countdown timer prepares to launch the journey, choose **View Metrics** and choose **Get Started**
+   1. Wait for the timer to complete and then you can view the journey metrics.  Viewing each activity in the journey will show you how many endpoints each activity received.
