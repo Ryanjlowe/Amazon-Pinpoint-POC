@@ -223,7 +223,7 @@ We are going to create a Renewal Journey to send a renewal email to all of our c
    1. Choose **Set entry condition**
    1. Under **Segments** choose **Renewal Eligible** dynamic segment created earlier.
    1. Under **Specify how often to add new segment members** choose **Once every** then choose **1** and **days**.
-    * This will evaluate the criteria for the dynamic segment everyday and push new endpoints into this journey.
+      * This will evaluate the criteria for the dynamic segment everyday and push new endpoints into this journey.
    1. Choose **Save**
 1. Add a decision split to branch the journey based on High Value vs Low Value customers.
    1. Choose **Add activity** directly under the **Journey entry** activity
