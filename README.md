@@ -54,7 +54,7 @@ Before beginning a POC, data homework should be done ahead of time to allow the 
 * Decide on what reporting data is required to measure success
 * What Campaign and/or Journey use-cases will be targeted with this POC.  Recommendation is to take a simple use-case to onboard for the initial POC.
 
-The Sample file [asset_enpoints.json](asset_enpoints.json) contains a sample dataset of end user data in the form of endpoints.  This can be used to run the below guide, but should be also used as a reference for real customer end-user data.  (Note: This can also be in a CSV format)
+The Sample file [asset_enpoints.json](asset_enpoints.json) contains a sample dataset of end user data in the form of endpoints.  The attributes in the sample dataset are defined in the **Import Endpoint Data** section below but are good references for both personalization and segmentation attributes.  This sample file can be used to run the below guide, but should be also used as a reference for real customer end-user data.  (Note: This can also be in a CSV format)
 
 Pipeline should be built to sync the above identified data into Pinpoint either through the API or through bulk imports.  To build out a pipeline to automatically import bulk CSV or JSON files, the [Amazon S3 Triggered Endpoint Imports](https://github.com/aws-samples/digital-user-engagement-reference-architectures#amazon-s3-triggered-endpoint-imports) reference architecture can be deployed to automatically import S3 files as they are persisted in an Amazon S3 bucket.  The guide below will guide through a manual upload of data via the Console UI.
 
@@ -141,7 +141,7 @@ We will now use the sample endpoint file in this repository to create endpoints 
 1. Choose **Choose files** and select the **asset_endpoints.json** file downloaded above.
 1. Choose **Create segment** to begin importing.
 
-> The follow attributes are part of the sample dataset.  A better POC would be to use the customers' real end-user data using the sample dataset as a guide.
+> The follow attributes are part of the sample dataset.  A better POC would be to use the customers' real end-user data using the sample dataset as a guide.  These attributes should come out of the work of the "Data Readiness Prep Work" section above.
 
 The following User Attributes are loaded in the sample file:
 * `FirstName`
