@@ -56,9 +56,38 @@ After a few minutes, the stack will be completely deployed and ready to go.  The
 
 ## Enable the Email and SMS Channel
 
-1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Segments**.
+1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Settings**.
+1. Enable the channels - TODO
 
 ## Create Templates
+
+For each of the templates below, create them -  TODO
+
+#### Upsell Template
+
+[Template File](tempaltes/1_upsell.html)
+
+**Subject:** Did you know about our Premium Subscription Plan {{User.UserAttributes.FirstName}}?
+
+#### Renewal 10% Off Template
+
+[Template File](tempaltes/2_renew_10.html)
+
+**Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 10% Off!
+
+#### Renewal 30% Off Template
+
+[Template File](tempaltes/3_renew_30.html)
+
+**Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 30% Off!
+
+
+#### Renewal Reminder Template
+
+[Template File](tempaltes/4_renewal_reminder.html)
+
+**Subject:** {{User.UserAttributes.FirstName}} Did you forget to renew?
+
 
 ## Import Endpoint Data
 
