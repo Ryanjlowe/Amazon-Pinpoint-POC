@@ -65,26 +65,26 @@ For each of the templates below, create them -  TODO
 
 #### Upsell Template
 
-[Template File](tempaltes/1_upsell.html)
+[Template File](templates/1_upsell.html)
 
 **Subject:** Did you know about our Premium Subscription Plan {{User.UserAttributes.FirstName}}?
 
 #### Renewal 10% Off Template
 
-[Template File](tempaltes/2_renew_10.html)
+[Template File](templates/2_renew_10.html)
 
 **Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 10% Off!
 
 #### Renewal 30% Off Template
 
-[Template File](tempaltes/3_renew_30.html)
+[Template File](templates/3_renew_30.html)
 
 **Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 30% Off!
 
 
 #### Renewal Reminder Template
 
-[Template File](tempaltes/4_renewal_reminder.html)
+[Template File](templates/4_renewal_reminder.html)
 
 **Subject:** {{User.UserAttributes.FirstName}} Did you forget to renew?
 
