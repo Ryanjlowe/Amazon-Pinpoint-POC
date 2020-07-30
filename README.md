@@ -36,6 +36,7 @@ By the end of this POC, you should have performed the following actions:
 1. Create Dynamic Segments
 1. Create a Campaign
 1. Create a Journey
+1. Run Engagement Queries in Athena
 
 
 ## Deploy the Digital User Engagement Events Database Solution
@@ -235,3 +236,6 @@ We are going to create a Renewal Journey to send a renewal email to all of our c
    1. Review the following screen and choose the **Publish**.
    1. While the Journey countdown timer prepares to launch the journey, choose **View Metrics** and choose **Get Started**
    1. Wait for the timer to complete and then you can view the journey metrics.  Viewing each activity in the journey will show you how many endpoints each activity received.
+
+
+## Run Queries in Athena
