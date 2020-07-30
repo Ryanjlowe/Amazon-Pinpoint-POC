@@ -75,7 +75,7 @@ Message templates also allow for personalization via token replacement and other
 1. Choose **Email** under **Channel**
 1. For **Template Name:** enter **Standard_Upsell**
 1. For **Subject** enter **Did you know about our Premium Subscription Plan {{User.UserAttributes.FirstName}}?**
-1. Copy the contents of the [Template File](templates/1_upsell.html) and paste it into the HTML template editor.
+1. Copy the contents of the [Upsell Template File](templates/1_upsell.html) and paste it into the HTML template editor.
 1. Choose **Create**
 
 #### Renewal 10% Off Template
@@ -84,7 +84,7 @@ Message templates also allow for personalization via token replacement and other
 1. Choose **Email** under **Channel**
 1. For **Template Name:** enter **Renew_10_percent_off**
 1. For **Subject** enter **{{User.UserAttributes.FirstName}} Renew Now and get 10% Off!**
-1. Copy the contents of the [Template File](templates/2_renew_10.html) and paste it into the HTML template editor.
+1. Copy the contents of the [Renewal 10% Off Template File](templates/2_renew_10.html) and paste it into the HTML template editor.
 1. Choose **Create**
 
 #### Renewal 30% Off Template
@@ -93,7 +93,7 @@ Message templates also allow for personalization via token replacement and other
 1. Choose **Email** under **Channel**
 1. For **Template Name:** enter **Renew_30_percent_off**
 1. For **Subject** enter **{{User.UserAttributes.FirstName}} Renew Now and get 30% Off!**
-1. Copy the contents of the [Template File](templates/3_renew_30.html) and paste it into the HTML template editor.
+1. Copy the contents of the [Renewal 30% Off Template File](templates/3_renew_30.html) and paste it into the HTML template editor.
 1. Choose **Create**
 
 #### Renewal Reminder Template
@@ -102,7 +102,7 @@ Message templates also allow for personalization via token replacement and other
 1. Choose **Email** under **Channel**
 1. For **Template Name:** enter **Renew_reminder**
 1. For **Subject** enter **{{User.UserAttributes.FirstName}} Did you forget to renew?!**
-1. Copy the contents of the [Template File](templates/4_renewal_reminder.html) and paste it into the HTML template editor.
+1. Copy the contents of the [Renewal Reminder Template File](templates/4_renewal_reminder.html) and paste it into the HTML template editor.
 1. Choose **Create**
 
 
