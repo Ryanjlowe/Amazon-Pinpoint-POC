@@ -62,40 +62,48 @@ After a few minutes, the stack will be completely deployed and ready to go.  The
 
 ## Create Templates
 
-For each of the templates below, create them -  TODO
+Amazon Pinpoint's Message templates feature allows for message templates to be configured to be used in Journeys, Campaigns, and via the API.  In Pinpoint, message templates can be created for the Email, SMS, Push, and Voice channel.  Message templates do not exist inside of a single Pinpoint project, rather, they are available to all projects within the same region.
+
+Message templates also allow for personalization via token replacement and other basic controls to render messages with personalized content.  As an example, Pinpoint would replace the User Attribute `FirstName` in an example subject line of `Thank you {{User.UserAttributes.FirstName}} for your purchase`.
+
+1. Navigate to the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/).
+1. Choose **Message templates** from the left navigation.
 
 #### Upsell Template
 
-**Name:** Standard_Upsell
-
-[Template File](templates/1_upsell.html)
-
-**Subject:** Did you know about our Premium Subscription Plan {{User.UserAttributes.FirstName}}?
+1. Choose **Create template**
+1. Choose **Email** under **Channel**
+1. For **Template Name:** enter **Standard_Upsell**
+1. For **Subject** enter **Did you know about our Premium Subscription Plan {{User.UserAttributes.FirstName}}?**
+1. Copy the contents of the [Template File](templates/1_upsell.html) and paste it into the HTML template editor.
+1. Choose **Create**
 
 #### Renewal 10% Off Template
 
-Name: Renew_10_percent_off
-
-[Template File](templates/2_renew_10.html)
-
-**Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 10% Off!
+1. Choose **Create template**
+1. Choose **Email** under **Channel**
+1. For **Template Name:** enter **Renew_10_percent_off**
+1. For **Subject** enter **{{User.UserAttributes.FirstName}} Renew Now and get 10% Off!**
+1. Copy the contents of the [Template File](templates/2_renew_10.html) and paste it into the HTML template editor.
+1. Choose **Create**
 
 #### Renewal 30% Off Template
 
-**Name:** Renew_30_percent_off
-
-[Template File](templates/3_renew_30.html)
-
-**Subject:** {{User.UserAttributes.FirstName}} Renew Now and get 30% Off!
-
+1. Choose **Create template**
+1. Choose **Email** under **Channel**
+1. For **Template Name:** enter **Renew_30_percent_off**
+1. For **Subject** enter **{{User.UserAttributes.FirstName}} Renew Now and get 30% Off!**
+1. Copy the contents of the [Template File](templates/3_renew_30.html) and paste it into the HTML template editor.
+1. Choose **Create**
 
 #### Renewal Reminder Template
 
-**Name:** Renew_reminder
-
-[Template File](templates/4_renewal_reminder.html)
-
-**Subject:** {{User.UserAttributes.FirstName}} Did you forget to renew?
+1. Choose **Create template**
+1. Choose **Email** under **Channel**
+1. For **Template Name:** enter **Renew_reminder**
+1. For **Subject** enter **{{User.UserAttributes.FirstName}} Did you forget to renew?!**
+1. Copy the contents of the [Template File](templates/4_renewal_reminder.html) and paste it into the HTML template editor.
+1. Choose **Create**
 
 
 ## Import Endpoint Data
@@ -107,9 +115,25 @@ We will now use the sample endpoint file in this repository to create endpoints 
 1.  Download the [asset_endpoints.json](asset_endpoints.json) from this repository
 1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Segments**.
 1. Choose **Create a segment**.
-1. Select **Import a segment**.
+1. Choose **Import a segment**.
 1. Choose **Choose files** and select the **asset_endpoints.json** file downloaded above.
 1. Choose **Create segment** to begin importing.
+
+The following User Attributes are loaded in the sample file:
+* `FirstName`
+* `LastName`
+* `Stage` - lifecycle stage of the user as determined by business rules external to Pinpoint: Renewal, Usage, Upsell
+* `CLVTier` - The Consumer Lifetime Value as determined by business rules external to Pinpoint: High, Low
+* `PreferredChannel` - The user's preferred channel
+* `NextRecommendedOffer` - The user's next recommended offer
+* `PlanType` - The user's current loan types (Standard/Premium)
+
+The following Endpoint Attributes are loaded:
+* `LastEngagement` - The last time the user engaged with this endpoint channel
+
+The following Metrics are loaded:
+* `ChurnPrediction` - A numeric score (0-1) assigned by Amazon SageMaker using a predictive model
+* `UpsellPrediction` - A numeric score (0-1) assigned by Amazon SageMaker using a predictive model
 
 ## Create Dynamic Segments
 
