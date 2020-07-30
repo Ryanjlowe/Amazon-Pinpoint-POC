@@ -274,17 +274,17 @@ Now that we have sent campaign and journey emails, we can query the engagement d
 1. Choose **due_eventdb** from the **Database** dropdown.
 1. If necessary, choose **Settings** and then provide an Amazon S3 path in the **Query result location** field.
 1. In the query window, paste the following query:
-```sql
-SELECT
- subject, COUNT(*) as sends,
- (SELECT COUNT(*) FROM email_open WHERE email_open.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumOpens,
- (SELECT COUNT(*) FROM email_click WHERE email_click.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumClicks,
- (SELECT COUNT(*) FROM email_unsubscribe WHERE email_unsubscribe.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumUnsubs
+  ```sql
+  SELECT
+   subject, COUNT(*) as sends,
+   (SELECT COUNT(*) FROM email_open WHERE email_open.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumOpens,
+   (SELECT COUNT(*) FROM email_click WHERE email_click.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumClicks,
+   (SELECT COUNT(*) FROM email_unsubscribe WHERE email_unsubscribe.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumUnsubs
 
-FROM email_send
-WHERE ingest_timestamp > current_timestamp - interval '30' day
-GROUP BY subject
-ORDER BY COUNT(*) DESC
-```
+  FROM email_send
+  WHERE ingest_timestamp > current_timestamp - interval '30' day
+  GROUP BY subject
+  ORDER BY COUNT(*) DESC
+  ```
 1.  Choose **Run query** to execute the query.  This query will show you number of opens, clicks, and unsubscribes by Email Subject line.
 1.  Choose other queries from the implementation guide, or write your own to explore the events across the different Athena views.
