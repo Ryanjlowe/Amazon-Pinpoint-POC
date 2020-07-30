@@ -33,6 +33,7 @@ If you are not familiar with Amazon Pinpoint you can learn more about this tool 
 
 By the end of this POC, you should have performed the following actions:
 
+1. Data Readiness Prep Work
 1. Deploy the Digital User Engagement Events Database
 1. Enable the Email and SMS Channel
 1. Add Templates
@@ -41,6 +42,21 @@ By the end of this POC, you should have performed the following actions:
 1. Create a Campaign
 1. Create a Journey
 1. Run Engagement Queries in Athena
+
+
+## Data Readiness Prep Work
+
+Before beginning a POC, data homework should be done ahead of time to allow the POC to go more smoothly.  There are a certain number of data decisions that need to be made in order for Pinpoint to be effective:
+
+* Decide on a unique identifier for Pinpoint Endpoints
+* Decide on Attributes needed for Personalization of Messages, ex: FirstName, LastName, SubscriptionEnd
+* Decide on Attributes needed for Segmentation, ex: PreferredChannel, Language Preferences, PlanType, Lifecycle Stage, Customer Lifetime Value Tier
+* Decide on what reporting data is required to measure success
+* What Campaign and/or Journey use-cases will be targeted with this POC.  Recommendation is to take a simple use-case to onboard for the initial POC.
+
+The Sample file [asset_enpoints.json](asset_enpoints.json) contains a sample dataset of end user data in the form of endpoints.  This can be used to run the below guide, but should be also used as a reference for real customer end-user data.  (Note: This can also be in a CSV format)
+
+Pipeline should be built to sync the above identified data into Pinpoint either through the API or through bulk imports.  To build out a pipeline to automatically import bulk CSV or JSON files, the [Amazon S3 Triggered Endpoint Imports](https://github.com/aws-samples/digital-user-engagement-reference-architectures#amazon-s3-triggered-endpoint-imports) reference architecture can be deployed to automatically import S3 files as they are persisted in an Amazon S3 bucket.  The guide below will guide through a manual upload of data via the Console UI.
 
 
 ## Deploy the Digital User Engagement Events Database Solution
@@ -72,6 +88,8 @@ Message templates also allow for personalization via token replacement and other
 
 1. Navigate to the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/).
 1. Choose **Message templates** from the left navigation.
+
+> The below templates are examples and are generic for the Campaign and Journey use-cases below.  A better POC would be to take customers' existing email templates and recreate them in Pinpoint to match the use-case's identified for Campaigns and Journeys.
 
 #### Upsell Template
 
@@ -123,6 +141,8 @@ We will now use the sample endpoint file in this repository to create endpoints 
 1. Choose **Choose files** and select the **asset_endpoints.json** file downloaded above.
 1. Choose **Create segment** to begin importing.
 
+> The follow attributes are part of the sample dataset.  A better POC would be to use the customers' real end-user data using the sample dataset as a guide.
+
 The following User Attributes are loaded in the sample file:
 * `FirstName`
 * `LastName`
@@ -144,6 +164,8 @@ The following Metrics are loaded:
 The other type of segments are Dynamic segments.  Dynamic segments are based on attributes that you define and can change over time. When you add new endpoints to Amazon Pinpoint, or if you modify or delete existing endpoints, the number of endpoints in your dynamic segment may increase or decrease.
 
 We will now create three new dynamic segments by applying attribute filters to the existing endpoints preloaded into the project.  These segments will later be used in Journeys and Campaigns.
+
+> The Dynamic segments below are very specific to the sample endpoint data and sample Campaign and Journey use-cases.  A better POC would be to set up Dynamic Segments that match the Use-cases identified.  The dynamic segments below can be used as examples of how to create dynamic segments and best practices.
 
 #### Renewal Eligible Segment
 1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Segments**.
@@ -194,6 +216,8 @@ To experiment with alternative campaign strategies, set up your campaign as an A
 
 We will now go through the steps to set up a campaign.
 
+> The campaign below is a sample campaign and can be used.  However, a better POC would be to use a real-life Customer campaign use-case.
+
 #### Create a Campaign
 
 1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Campaigns**.
@@ -219,6 +243,8 @@ We will now go through the steps to set up a campaign.
 A journey is a customized, multi-step engagement experience. To create a journey, start by choosing a segment that defines which customers will participate in the journey. Then add the activities that customers pass through on their journeys. Activities can include sending messages or splitting customers into groups based on their behaviors.
 
 We are going to create a Renewal Journey to send a renewal email to all of our customers who are identified by the **Renewal Eligible** dynamic segment.  For our high value customers, identified by the **High Value Customers** segment, we are going to offer them 30% off, where as  our low value customers will receive 10% off.  In addition, if our high value customers do not open the email after 3 days, we will send them a reminder email.
+
+> The journey below is a sample journey and can be used.  However, a better POC would be to use a real-life Customer journey use-case.
 
 1. Navigate to the **My Pinpoint Project** in the [Amazon Pinpoint Console](https://console.aws.amazon.com/pinpoint/), then **Journeys**.
 1. Follow the guided help to see all of the Journey features.
@@ -274,17 +300,17 @@ Now that we have sent campaign and journey emails, we can query the engagement d
 1. Choose **due_eventdb** from the **Database** dropdown.
 1. If necessary, choose **Settings** and then provide an Amazon S3 path in the **Query result location** field.
 1. In the query window, paste the following query:
-  ```sql
-  SELECT
-   subject, COUNT(*) as sends,
-   (SELECT COUNT(*) FROM email_open WHERE email_open.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumOpens,
-   (SELECT COUNT(*) FROM email_click WHERE email_click.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumClicks,
-   (SELECT COUNT(*) FROM email_unsubscribe WHERE email_unsubscribe.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumUnsubs
+```sql
+SELECT
+ subject, COUNT(*) as sends,
+ (SELECT COUNT(*) FROM email_open WHERE email_open.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumOpens,
+ (SELECT COUNT(*) FROM email_click WHERE email_click.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumClicks,
+ (SELECT COUNT(*) FROM email_unsubscribe WHERE email_unsubscribe.subject = email_send.subject AND ingest_timestamp > current_timestamp - interval '30' day) AS NumUnsubs
 
-  FROM email_send
-  WHERE ingest_timestamp > current_timestamp - interval '30' day
-  GROUP BY subject
-  ORDER BY COUNT(*) DESC
-  ```
-1.  Choose **Run query** to execute the query.  This query will show you number of opens, clicks, and unsubscribes by Email Subject line.
-1.  Choose other queries from the implementation guide, or write your own to explore the events across the different Athena views.
+FROM email_send
+WHERE ingest_timestamp > current_timestamp - interval '30' day
+GROUP BY subject
+ORDER BY COUNT(*) DESC
+```
+5.  Choose **Run query** to execute the query.  This query will show you number of opens, clicks, and unsubscribes by Email Subject line.
+6.  Choose other queries from the implementation guide, or write your own to explore the events across the different Athena views.
