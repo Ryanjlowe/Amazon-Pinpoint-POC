@@ -2,9 +2,7 @@
 
 Amazon Pinpoint is a multi-channel digital engagement service. It is a part of the Customer Engagement suite of services, enabling customers to send both transactional and promotional messages across email, SMS, push notification, voice, and custom channels.
 
-> This POC provides sample Pinpoint Endpoint data and sample Email Templates. These can be used to set up a fully functional Pinpoint instance.  However, we recommend replacing the sample endpoint data with real customer end-user data, replacing the email templates with real customer templates, and replacing the Campaign and Journey use-cases with real use-cases.  The samples can be used as a reference.
->
-> The blockquote syntax will be used to denote places where real customer data should be provided.
+This POC provides sample Pinpoint Endpoint data and sample Email Templates. These can be used to set up a fully functional Pinpoint instance.  However, we recommend replacing the sample endpoint data with real customer end-user data, replacing the email templates with real customer templates, and replacing the Campaign and Journey use-cases with real use-cases.  The samples can be used as a reference.
 
 This repository assumes a base familiarity with the service and if you have not already done so it is recommended that you use the getting-started material below.
 
